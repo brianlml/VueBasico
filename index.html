@@ -7,24 +7,41 @@
 </head>
 <body>
     <div id="app">
-        <h1>El contador esta en {{ contador }}</h1>
-        <button v-on:click="sumar">Sumar + </button>
-        <button v-on:click="restar">Restar - </button>
+        <input type="text" name="nombre" placeholder="Ingrese tu nombre" v-model="nombre">
+        <p>Tu nombre en mayuscula {{nombre | uppercase }}</p>
+        <form v-on:submit.prevent="submit" action="">
+            <h2>¿Cual es tu banda favorita?</h2>
+            <input v-model="bandas"type="checkbox" id="Elbordo" value="Elbordo">
+            <label for="Elbordo">Aguante Elbordo!</label>
+            <br>
+            <input v-model="bandas"type="checkbox" id="LaVelaPuerca" value="LaVelaPuerca">
+            <label for="LaVelaPuerca">Aguante LaVelaPuerca!</label>
+            <br>
+            <input v-model="bandas"type="checkbox" id="Larenga" value="Larenga">
+            <label for="Larenga">Aguante LaRenga!</label>
+            <br>
+            <button type="submit">Enviar</button>
+        </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript">
         let app = new Vue({
           el:'#app',
           data:{
-              contador: 0
+              contador: 0,
+              nombre: '',
+              bandas: []
               
           },
+          filters:{
+              uppercase: function (str) {
+                  return str.toUpperCase()
+              }
+          },
           methods:{
-              sumar: function () {
-                  this.contador++
-              },
-              restar: function () {
-                  this.contador--
+              submit: function () {
+                  console.log("Se ejecuto el metodo submit")
+                  console.log(this.bandas)
               }
           }
         })
