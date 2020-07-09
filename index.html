@@ -7,19 +7,12 @@
 </head>
 <body>
     <div id="app">
-        <input type="text" name="nombre" placeholder="Ingrese tu nombre" v-model="nombre">
-        <p>Tu nombre en mayuscula {{nombre | uppercase }}</p>
         <form v-on:submit.prevent="submit" action="">
             <h2>¿Cual es tu banda favorita?</h2>
-            <input v-model="bandas"type="checkbox" id="Elbordo" value="Elbordo">
-            <label for="Elbordo">Aguante Elbordo!</label>
-            <br>
-            <input v-model="bandas"type="checkbox" id="LaVelaPuerca" value="LaVelaPuerca">
-            <label for="LaVelaPuerca">Aguante LaVelaPuerca!</label>
-            <br>
-            <input v-model="bandas"type="checkbox" id="Larenga" value="Larenga">
-            <label for="Larenga">Aguante LaRenga!</label>
-            <br>
+        <template v-for="b in bandas">
+            <input v-model="bandasSeleccionadas" type="checkbox" v-bind:id="b.value" v-bind:value="b.value">
+            <label v-bind:for="b.value">{{b.nombre}}</label> 
+        </template>
             <button type="submit">Enviar</button>
         </form>
     </div>
@@ -28,20 +21,26 @@
         let app = new Vue({
           el:'#app',
           data:{
-              contador: 0,
-              nombre: '',
-              bandas: []
-              
-          },
-          filters:{
-              uppercase: function (str) {
-                  return str.toUpperCase()
-              }
+              bandas: [
+                  {
+                      nombre: 'Aguante Elbordo!',
+                      value: 'Elbordo'
+                  },
+                  {
+                      nombre: 'Aguante LaVelaPuerca!',
+                      value: 'LaVela'
+                  },
+                  {
+                      nombre:'Aguante LaRenga!',
+                      value: 'LaRenga'
+                  }
+              ],
+              bandasSeleccionadas: []
           },
           methods:{
               submit: function () {
                   console.log("Se ejecuto el metodo submit")
-                  console.log(this.bandas)
+                  console.log(this.bandasSeleccionadas)
               }
           }
         })
