@@ -7,13 +7,8 @@
 </head>
 <body>
     <div id="app">
-        <div v-show="mostrar">
-        <h1>Hola, {{nombre}}!</h1>
-        <a v-bind:href="url" target="_blank">Ir a {{pagina}}</a>
-        </div>
-        <div v-show="!mostrar">
-            <h1>Mensaje Oculto</h1>
-        </div>   
+        <h1>{{ titulo | uppercase }}</h1>
+        <h2>{{ subtitulo | lowercase }}</h2>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript">
@@ -23,7 +18,17 @@
               nombre: 'Brian',
               url:'https://google.com',
               pagina:'Google',
-              mostrar: true
+              mostrar: true,
+              titulo: "Viendo un curso",
+              subtitulo: "Tomando mates"
+          },
+          filters:{
+              uppercase: function (str){
+                  return str.toUpperCase()
+              },
+              lowercase: function (str){
+                  return str.toLowerCase()
+              }
           }
         })
     </script>
