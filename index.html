@@ -7,27 +7,24 @@
 </head>
 <body>
     <div id="app">
-        <h1>{{ titulo | uppercase }}</h1>
-        <h2>{{ subtitulo | lowercase }}</h2>
+        <h1>El contador esta en {{ contador }}</h1>
+        <button v-on:click="sumar">Sumar + </button>
+        <button v-on:click="restar">Restar - </button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript">
         let app = new Vue({
           el:'#app',
           data:{
-              nombre: 'Brian',
-              url:'https://google.com',
-              pagina:'Google',
-              mostrar: true,
-              titulo: "Viendo un curso",
-              subtitulo: "Tomando mates"
+              contador: 0
+              
           },
-          filters:{
-              uppercase: function (str){
-                  return str.toUpperCase()
+          methods:{
+              sumar: function () {
+                  this.contador++
               },
-              lowercase: function (str){
-                  return str.toLowerCase()
+              restar: function () {
+                  this.contador--
               }
           }
         })
