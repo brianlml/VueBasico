@@ -7,10 +7,13 @@
 </head>
 <body>
     <div id="app">
-        <template v-if="mostrar">
+        <div v-show="mostrar">
         <h1>Hola, {{nombre}}!</h1>
-        <a v-if="mostrar" v-bind:href="url" target="_blank">Ir a {{pagina}}</a>
-        </template>   
+        <a v-bind:href="url" target="_blank">Ir a {{pagina}}</a>
+        </div>
+        <div v-show="!mostrar">
+            <h1>Mensaje Oculto</h1>
+        </div>   
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript">
