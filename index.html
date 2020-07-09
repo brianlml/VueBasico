@@ -7,8 +7,10 @@
 </head>
 <body>
     <div id="app">
+        <template v-if="mostrar">
         <h1>Hola, {{nombre}}!</h1>
-        <a v-bind:href="url" target="_blank">Ir a {{pagina}}</a>
+        <a v-if="mostrar" v-bind:href="url" target="_blank">Ir a {{pagina}}</a>
+        </template>   
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript">
@@ -17,7 +19,8 @@
           data:{
               nombre: 'Brian',
               url:'https://google.com',
-              pagina:'Google'
+              pagina:'Google',
+              mostrar: true
           }
         })
     </script>
