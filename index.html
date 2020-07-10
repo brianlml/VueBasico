@@ -10,14 +10,27 @@
         <form v-on:submit.prevent="submit" action="">
             <h2>¿Cual es tu banda favorita?</h2>
         <template v-for="b in bandas">
-            <input v-model="bandasSeleccionadas" type="checkbox" v-bind:id="b.value" v-bind:value="b.value">
-            <label v-bind:for="b.value">{{b.nombre}}</label> 
+            <banda v-bind:b="b" v-on:checked="Selectcurso"></banda> 
         </template>
             <button type="submit">Enviar</button>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript">
+        Vue.component('banda',{
+            props:['b'],
+            methods:{
+              Onchange: function(ev){
+                this.$emit('checked',this.b.value, ev.target.checked)
+              }  
+            },
+            template: `
+            <div>
+            <input type="checkbox" v-bind:id="b.value" v-bind:value="b.value" @change="Onchange">
+            <label v-bind:for="b.value">{{b.nombre}}</label>
+            </div>
+            `
+        })
         let app = new Vue({
           el:'#app',
           data:{
@@ -41,6 +54,15 @@
               submit: function () {
                   console.log("Se ejecuto el metodo submit")
                   console.log(this.bandasSeleccionadas)
+              },
+              Selectcurso: function (b,checked){
+                   if (checked){
+                       this.bandasSeleccionadas.push(b)
+                   }
+                   else{
+                       let index = this.bandasSeleccionadas.indexOf(b)
+                       this.bandasSeleccionadas.splice(index, 1)
+                   }
               }
           }
         })
